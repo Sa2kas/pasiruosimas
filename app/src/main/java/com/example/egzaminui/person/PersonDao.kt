@@ -1,17 +1,19 @@
 package com.example.egzaminui.person
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Dao
 interface PersonDao {
-    @Insert
-    fun insert(person: Person?)
+    @Insert (onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertPerson(person: Person)
 
-    @Query("DELETE FROM Person")
-    fun deleteAll()
+    @Query("DELETE FROM person_table")
+    suspend fun deleteAll()
 
-    @get:Query("SELECT * from Person ORDER BY first_name ASC")
-    val allPersons: List<Person?>?
+    @Query("SELECT * FROM person_table ORDER BY name ASC")
+    fun readAllPersons(): LiveData<List<Person>>
+
+    @Update
+    suspend fun updatePerson(person: Person)
 }
