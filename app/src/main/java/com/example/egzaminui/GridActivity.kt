@@ -27,9 +27,11 @@ import java.util.*
 lateinit var photoPath: String
 val REQUEST_TAKE_PHOTO = 1
 val REQUEST_IMAGE_CAPTURE= 1*/
-lateinit var bmp: Bitmap
+
 
 class GridActivity : AppCompatActivity() {
+    lateinit var bmp: Bitmap
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grid)
@@ -46,6 +48,7 @@ class GridActivity : AppCompatActivity() {
 
             var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(intent, 123)
+            save_btn.isEnabled = true
         }
 
         upload_btn.setOnClickListener {
@@ -53,7 +56,6 @@ class GridActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 456)
-
         }
 
         save_btn.setOnClickListener {
@@ -61,13 +63,14 @@ class GridActivity : AppCompatActivity() {
             //dispatchTakePictureIntent()
             //galleryAddPic()
 
-            if (bmp != null) {
+            if (this::bmp.isInitialized) {
+
                 saveMediaToStorage(bmp)
                 //Toast.makeText(this , "veikia" , Toast.LENGTH_SHORT).show()
             }
             else
             {
-                Toast.makeText(this , "gaidys" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this , "neveikia" , Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -121,7 +124,7 @@ class GridActivity : AppCompatActivity() {
         fos?.use {
             // Finally writing the bitmap to the output stream that we opened
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
-            Toast.makeText(this , "Captured View and saved to Gallery" , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this , "Picture saved to Gallery" , Toast.LENGTH_SHORT).show()
         }
     }
 

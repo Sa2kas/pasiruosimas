@@ -23,6 +23,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val button3 : Button = findViewById(R.id.button3)
+        button3.setOnClickListener {
+            val intent = Intent(this, FigureActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }

@@ -3,9 +3,9 @@ package com.example.egzaminui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class PhotoActivity : AppCompatActivity() {
+class DrawFigureActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_photo)
+        setContentView(R.layout.activity_draw_figure)
     }
 }
