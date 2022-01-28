@@ -15,7 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import kotlinx.android.synthetic.main.activity_grid.*
+import kotlinx.android.synthetic.main.activity_photo.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -29,12 +29,12 @@ val REQUEST_TAKE_PHOTO = 1
 val REQUEST_IMAGE_CAPTURE= 1*/
 
 
-class GridActivity : AppCompatActivity() {
+class PhotoActivity : AppCompatActivity() {
     lateinit var bmp: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_grid)
+        setContentView(R.layout.activity_photo)
 
         val imageView = findViewById<ImageView>(R.id.imageView)
 

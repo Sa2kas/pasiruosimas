@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         }
         val button2 : Button = findViewById(R.id.button2)
         button2.setOnClickListener {
-            val intent = Intent(this, GridActivity::class.java)
+            val intent = Intent(this, PhotoActivity::class.java)
             startActivity(intent)
         }
 

@@ -40,60 +40,43 @@ class FigureActivity : AppCompatActivity() {
 
 
         clear_btn.setOnClickListener {
+            //isvalo viska kas nupiesta su pirstu
             //figureView.resetPaths()
-            //if (this::canvas.isInitialized){
-                canvas.drawColor(Color.WHITE)
-            //}
-            //drawOval()
-            //figureView.setBrushColor(getColor(R.color.teal_200))
-            //figureView.setWidth(10f)
+
+            //isvalo canvas'a nuo figuru (uzspalvina visa canvas)
+            //spalva black nes canvas yra juodas
+            canvas.drawColor(Color.BLACK)
         }
 
-        /*figureView.setOnClickListener {
-            figureView.animate().apply {
-                duration = 1000
-                rotationYBy(360f)
-            }.withEndAction {
-                figureView.animate().apply {
-                    duration = 1000
-                    rotationBy(360f)
-                }
-            }.start()
-        }*/
-
-        //paprastas pasisukimas
-        /*figureView.animate().apply {
-
-            duration = 5000
-            rotationBy(360f)
-        }*/
+        //rotate yra .xml failas kuriame aprasytas sukimasis
+        //galima animuoti ir be failo
         var rotation = AnimationUtils.loadAnimation(this, R.anim.rotate)
         rotation.fillAfter = true
         figureView.startAnimation(rotation)
 
         figureView.setOnClickListener {
+            //sitas padaro random true/false
+            //nuo true/false priklauso ar figura bus pilnavidure
             val random = Random()
             val r = random.nextBoolean()
+
+            //padaro random spalva kaskart palietus fugureView
             val rnd = Random()
             val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-            val rnds = (0..10).random() // generated random from 0 to 10 included
+
+            //nupiesia ant virsaus kvadrata su random spalva ir su uzpildu arba be
             drawRectangle(color, r)
 
         }
 
         draw_btn.setOnClickListener {
-            //juodam backui
-            /*bit = fView.drawToBitmap(Bitmap.Config.ARGB_8888)
-            canvas = Canvas(bit)*/
-
-            // piesti kazka
-            //drawRectangle(Color.YELLOW, false)
-            figureView.clearAnimation()
             drawTriangle()
+        }
 
-            // now bitmap holds the updated pixels
-            // set bitmap as background to ImageView
-            //figureView.setImageDrawable(BitmapDrawable(resources, bit)) //arba fView
+        stop_btn.setOnClickListener {
+            //sustabdo judejima figuros ir pastato i pradine pozicija
+            //ir po to nebeveikia figuros spalvos keitimas palieciant
+            figureView.clearAnimation()
         }
 
         save_draw_btn.setOnClickListener {
@@ -144,6 +127,13 @@ class FigureActivity : AppCompatActivity() {
     }
 
     fun drawTriangle(){
+        //        !!!
+        //nustato piestuko spalva
+        //figureView.setBrushColor(getColor(R.color.teal_200))
+
+        //nustato piestuko stori
+        //figureView.setWidth(10f)
+
         var left = 0
         var top = 0
         var right = figureView.width
@@ -180,24 +170,7 @@ class FigureActivity : AppCompatActivity() {
         paint.strokeWidth = 10f
         canvas.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), paint)
 
-        // draw rectangle shape to canvas
-        /*var shapeDrawable: ShapeDrawable
-        shapeDrawable = ShapeDrawable(RectShape())
-        shapeDrawable.setBounds(left, top, right, bottom)
-        shapeDrawable.paint.color = Color.MAGENTA
-        shapeDrawable.draw(canvas)*/
-    }
-
-    fun drawOval(){
-        var left = 0
-        var top = 0
-        var right = figureView.width / 2
-        var bottom = figureView.height / 2
-        var paint = Paint()
-        paint.style = Paint.Style.FILL_AND_STROKE
-        paint.color = Color.CYAN
-        paint.strokeWidth = 10f
-        canvas.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), paint)
 
     }
+
 }
